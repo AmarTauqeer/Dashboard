@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+header {
+  height: 60px;
+  background-color: #092e5b;
+  font-size: 24px;
+  color: white;
+  padding-left: 32px;
+  padding-top: 10px;
+}
+
+header svg {
+  font-size: 30px;
+}
+.heading {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+label {
+  font-weight: 700;
+  font-size: large;
+}
+.main {
+  height: 90vh;
+  padding-left: 10px;
+}
+
+.main.active {
+  height: 90vh;
+  padding-left: 310px;
+}
+@media only screen and (max-width: 600px) {
+  .main.active {
+    padding-top: 300px;
+    height: 90vh;
+    padding-left: 10px;
+  }
+}
