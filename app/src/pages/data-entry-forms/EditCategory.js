@@ -7,6 +7,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const EditCategory = () => {
   const [catName, setCatName] = useState("");
@@ -45,6 +46,7 @@ const EditCategory = () => {
         .catch((err) => console.log(err));
 
       if (response) {
+        toast("data updated successfully");
         dispatch(updateCategory(data));
         history.push("/category");
       }

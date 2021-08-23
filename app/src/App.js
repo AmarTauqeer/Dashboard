@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Category from "./pages/data-entry-forms/Category";
@@ -8,7 +9,9 @@ import Navbar from "./components/navbar/Navbar";
 import { FaBars } from "react-icons/fa";
 import AddCategory from "./pages/data-entry-forms/AddCategory";
 import EditCategory from "./pages/data-entry-forms/EditCategory";
+import { toast } from "react-toastify";
 
+toast.configure();
 function App() {
   const [isSidebar, setIsSidebar] = useState(false);
 

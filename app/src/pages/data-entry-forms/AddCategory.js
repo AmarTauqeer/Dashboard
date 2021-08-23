@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addCategory } from "../../redux/actions/categoryActions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const AddCategory = () => {
   const [catName, setCatName] = useState("");
   const [description, setDescription] = useState("");
@@ -17,7 +17,6 @@ const AddCategory = () => {
       category_name: catName,
       description: description,
     };
-    console.log(data);
 
     const add = async () => {
       const response = await axios
@@ -28,6 +27,7 @@ const AddCategory = () => {
 
     if (data) {
       add();
+      toast("data saved successfully");
       dispatch(addCategory(data));
       history.push("/category");
     }
@@ -36,7 +36,11 @@ const AddCategory = () => {
     <div className="container w-50 mt-4">
       <h2 className="heading mb-4">
         Add Category <hr />
+        <Link to="/category" className="nav-link">
+          Back
+        </Link>
       </h2>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-2 row">
           <label className="col-sm-4 col-form-label">Category Name</label>
