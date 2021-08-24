@@ -13,6 +13,11 @@ const AddCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!catName || !description) {
+      toast("Please fill all the requird fields.");
+      return false;
+    }
+
     const data = {
       category_name: catName,
       description: description,

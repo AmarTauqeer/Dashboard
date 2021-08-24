@@ -4,7 +4,7 @@ import {
   updateCategory,
   selectedCategory,
 } from "../../redux/actions/categoryActions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -34,6 +34,10 @@ const EditCategory = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!catName || !description) {
+      toast("Please fill all the requird fields.");
+      return false;
+    }
     const data = {
       id: catId,
       category_name: catName,
@@ -60,6 +64,9 @@ const EditCategory = () => {
     <div className="container w-50 mt-4">
       <h2 className="heading mb-4">
         Update Category <hr />
+        <Link to="/category" className="nav-link">
+          Back
+        </Link>
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-2 row">

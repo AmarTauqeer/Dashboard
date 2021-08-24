@@ -1,11 +1,13 @@
 from django.db import models
 
 # Create your models here.
-# class Users(models.Model):
-#     user_name = models.CharField(max_length=100, blank=False, default='')
-#     user_password = models.CharField(max_length=200, blank=False, default='')
-#     create_date = models.DateField()
-#     is_admin = models.BooleanField(default=False)
+
+
+class Users(models.Model):
+    user_name = models.CharField(max_length=100, blank=False, default='')
+    user_password = models.CharField(max_length=200, blank=False, default='')
+    create_date = models.DateField(auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
 
 
 class Categories(models.Model):
