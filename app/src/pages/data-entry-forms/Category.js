@@ -8,11 +8,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
-import { IoAdd } from "react-icons/io5";
+import { GrDocumentCsv } from "react-icons/gr";
 import { BsSearch } from "react-icons/bs";
 import { RiAddCircleLine } from "react-icons/ri";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
+import { CSVLink } from "react-csv";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -98,6 +99,17 @@ const Category = () => {
     setPageNumber(selected);
   };
 
+  const headers = [
+    { label: "ID", key: "id" },
+    { label: "Category Name", key: "category_name" },
+    { label: "Description", key: "description" },
+  ];
+
+  const csvReport = {
+    filename: "Category.csv",
+    headers: headers,
+    data: categories,
+  };
   return (
     <>
       <div className="container-fluid w-50 mt-4">
@@ -116,11 +128,18 @@ const Category = () => {
             <button className="btn btn-dark">
               <BsSearch size={25} />
             </button>
-
             <Link to="/add-category" className="nav-link">
+              Add
               <RiAddCircleLine size={20} color="green" />
-              Create
             </Link>
+            {categories && (
+              <>
+                <CSVLink {...csvReport} className="nav-link">
+                  Export
+                  <GrDocumentCsv size={20} />
+                </CSVLink>
+              </>
+            )}
           </div>
         </div>
 
