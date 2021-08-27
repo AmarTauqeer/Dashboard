@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid w-50 mt-4">
+    <div className="container w-50 mt-4">
       <br />
       <br />
       <h2 className="heading mb-4">
@@ -81,17 +81,25 @@ const Login = () => {
         </div>
         <div className="form-group row mb-2">
           <label className="col-sm-4 col-form-label"></label>
-          <div className="col-sm-8">
-            <button type="submit" className="btn btn-success btn-sm col-md-2">
+          <div className="d-flex align-items-center justify-content-center col-sm-8">
+            <button type="submit" className="btn btn-secondary btn-sm col-sm-4">
               Login
             </button>
-
             <button
               type="button"
-              className="btn btn-primary btn-sm col-md-2 m-1"
+              className="btn btn-secondary btn-sm col-sm-4"
               onClick={handleCancelExit}
             >
               Cancel/Exit
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm col"
+              onClick={() => {
+                history.push("/register");
+              }}
+            >
+              Register
             </button>
           </div>
         </div>

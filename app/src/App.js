@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <header>
-        <FaBars onClick={showSidebar} />
+        <FaBars onClick={showSidebar} /> Dashboard
       </header>
       <Router>
         {isSidebar && <Navbar showSidebar={showSidebar} />}

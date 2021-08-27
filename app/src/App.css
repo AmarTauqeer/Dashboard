@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: "Roboto", sans-serif;
 }
@@ -29,6 +23,11 @@ label {
   font-weight: 700;
   font-size: large;
 }
+.form-control,
+.btn {
+  border-radius: 15px;
+}
+
 .main {
   height: 90vh;
   padding-left: 10px;
@@ -54,12 +53,13 @@ label {
 }
 
 .page-link {
-  position: relative;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #673ab7 !important;
   text-decoration: none;
   background-color: #fff;
-  border: 1px solid #673ab7 !important;
+  border: 1px;
 }
 
 .page-link:hover {
@@ -91,5 +91,12 @@ label {
     padding-top: 300px;
     height: 90vh;
     padding-left: 10px;
+  }
+  .form-control {
+    width: 200px;
+  }
+  .container {
+    width: 100%;
+    margin: 0;
   }
 }

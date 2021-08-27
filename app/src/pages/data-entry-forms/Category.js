@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiFillDelete } from "react-icons/ai";
 import { GrDocumentCsv } from "react-icons/gr";
-import { BsSearch } from "react-icons/bs";
 import { RiAddCircleLine } from "react-icons/ri";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
@@ -80,14 +79,14 @@ const Category = () => {
         <div className="col-md-4">{cat.description}</div>
         <div className="col-md-3">
           <Link to={`/edit-category/${cat.id}`}>
-            <FiEdit size={20} color="orange" />
+            <FiEdit size={25} color="orange" />
           </Link>
           <button
             type="button"
             className="btn"
             onClick={() => deleteHandler(cat.id)}
           >
-            <AiFillDelete size={20} color="red" />
+            <AiFillDelete size={25} color="red" />
           </button>
         </div>
       </div>
@@ -112,49 +111,44 @@ const Category = () => {
   };
   return (
     <>
-      <div className="container-fluid w-50 mt-4">
+      <div className="container w-75 mt-4 border">
         <h2 className="heading">
           Category List <hr />
         </h2>
-        <div className="row pb-2" align="right">
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control form-control-md"
-              onChange={handleChange}
-              placeholder="Enter category name"
-              value={searchTerms}
-            />
-            <button className="btn btn-dark">
-              <BsSearch size={25} />
-            </button>
-            <Link to="/add-category" className="nav-link">
-              Add
-              <RiAddCircleLine size={20} color="green" />
-            </Link>
-            {categories && (
-              <>
-                <CSVLink {...csvReport} className="nav-link">
-                  Export
-                  <GrDocumentCsv size={20} />
-                </CSVLink>
-              </>
-            )}
-          </div>
+
+        <div className="d-sm-flex align-items-center justify-content-end pb-2">
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleChange}
+            placeholder="Search by category name"
+            value={searchTerms}
+          />
+
+          <Link to="/add-category" className="nav-link">
+            <RiAddCircleLine size={30} color="green" />
+          </Link>
+          {categories && (
+            <div className="nav-link">
+              <CSVLink {...csvReport}>
+                <GrDocumentCsv size={30} />
+              </CSVLink>
+            </div>
+          )}
         </div>
 
-        <div className="row pb-2 bg-dark text-white">
-          <div className="col-md-2">
+        <div className="d-flex align-items-center justify-content-center">
+          <div className="col-sm-2">
             <label>ID</label>
           </div>
-          <div className="col-md-3">
-            <label>CATEGORY NAME</label>
+          <div className="col-sm-3">
+            <label>C.NAME</label>
           </div>
-          <div className="col-md-4">
-            <label>DESCRIPTION</label>
+          <div className="col-sm-4">
+            <label>DESC</label>
           </div>
 
-          <div className="col-md-3">
+          <div className="col-sm-3">
             <label>ACTION</label>
           </div>
         </div>
@@ -169,7 +163,6 @@ const Category = () => {
               pageLinkClassName={"page-link"}
               pageCount={pageCount}
               onPageChange={changePage}
-              containerClassName={"pagination"}
               previousLinkClassName={"page-link"}
               nextLinkClassName={"page-link"}
               disabledClassName={"paginationDisabled"}
