@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'dashboardapp.apps.DashboardappConfig',
+   'drf_yasg',
 ]
 
 MIDDLEWARE = [
