@@ -9,6 +9,7 @@
 - Django, REST API
 - Authentication
 - Complete CRUD operations
+- Swagger documentation
 
 # Install
 
@@ -21,6 +22,7 @@
 - python manage.py runserver
 
 # Frontend
+
 - Clone the repository
 - cd dashboard folder
 - cd app
@@ -30,7 +32,3 @@
 # live demo
 
 https://drive.google.com/file/d/1Vqun4qBkqQB9Z_r2Q3u5DWKVdJJrSG3b/view
-
-
-
-
