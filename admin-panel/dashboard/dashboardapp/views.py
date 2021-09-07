@@ -8,6 +8,7 @@ from dashboardapp.serializers import CategorySerializer, ProductsSerializer, Use
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 
+from django.contrib.auth.hashers import make_password, check_password
 
 """
     endpoints
@@ -26,6 +27,7 @@ def all_category(request):
 
         serializer = CategorySerializer(categories, many=True)
         return JsonResponse(serializer.data, safe=False)
+
 
 @swagger_auto_schema(methods=['post'], request_body=CategorySerializer)
 @api_view(['POST'])
@@ -46,6 +48,7 @@ def delete_category(request, id):
         category.delete()
         return JsonResponse({'message': 'User was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
+
 @swagger_auto_schema(methods=['put'], request_body=CategorySerializer)
 @api_view(['PUT'])
 def update_category(request, id):
@@ -57,26 +60,59 @@ def update_category(request, id):
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @swagger_auto_schema(methods=['post'], request_body=UserSerializer)
 @api_view(['POST'])
 def add_user(request):
     if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
+        pass_encrypt = make_password(request.data['user_password'])
+        user_data = {
+            "user_name": request.data['user_name'],
+            "user_password": pass_encrypt,
+        }
+        serializer = UserSerializer(data=user_data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @swagger_auto_schema(methods=['post'], request_body=UserSerializer)
 @api_view(['POST'])
 def check_user(request):
     if request.method == 'POST':
-        user_data = request.data
-        condition1 = Q(user_password__icontains=user_data['user_password'])
-        condition2 = Q(user_name__icontains=user_data['user_name'])
-        user_found = Users.objects.filter(condition1 & condition2)
-        # print(len(user_found))
-        if len(user_found) != 0:
-            return JsonResponse("Found", safe=False)
+        user = Users.objects.get(user_name=request.data['user_name'])
+        if user:
+            match_password = check_password(
+                request.data['user_password'], user.user_password)
+            if match_password:
+                return JsonResponse("Found", safe=False)
+            else:
+                return JsonResponse("Email or password incorrect", safe=False)
         else:
-            return JsonResponse("Not found", safe=False)
+            return JsonResponse("Email or password incorrect", safe=False)
+
+
+@api_view(['PUT'])
+def change_password(request):
+    if request.method == 'PUT':
+        user = Users.objects.get(user_name=request.data['user_name'])
+        print(user)
+        if user:
+            match_password = check_password(
+                request.data['old_password'], user.user_password)
+            pass_encrypt = make_password(request.data['user_password'])
+            if match_password:
+                new_data = {
+                    "user_name": user.user_name,
+                    "user_password": pass_encrypt
+                }
+                serializer = UserSerializer(user, data=new_data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return JsonResponse(serializer.data)
+                return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return JsonResponse("Email or password incorrect", safe=False)
+        else:
+            return JsonResponse("Email or password incorrect", safe=False)
